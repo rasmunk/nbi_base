@@ -139,6 +139,12 @@ a, a:hover {
     #color: #ffffff;
 }
 
+/* left align thumbnail text */
+.caption p {
+    text-align: left;
+}
+
+
 /* Datasets Overview */
 /* Desktop */
 
