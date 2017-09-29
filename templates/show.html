@@ -29,7 +29,7 @@
                 </div>
             {% else %}
                 {% for key, value in object.__dict__.items() %}
-                    {% if key != '_id' and key != 'name' and key != 'description' %}
+                    {% if key not in ['_id', 'name', 'description', 'image'] %}
                         <p>{{ key.upper() }}: {{ value }}</p>
                     {% endif %}
                 {% endfor %}
