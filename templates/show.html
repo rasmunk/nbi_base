@@ -1,0 +1,39 @@
+<div class="container-full">
+    {% if object %}
+        <div class="container-fluid top-section section">
+            <h1><a href="{{ url_for('show', id=object._id) }}"
+                   class="d-block mb-4" style="color: black;">{{ object.name }}</a></h1>
+            <div class="nbi-left">
+                <p>{{ object.description }}</p>
+            </div>
+        </div>
+        <div class="container-fluid mid-section section">
+            <div class="nbi-left">
+                <img src="{{ url_for('img_render', filename=object.image) }}" class="img-fluid">
+            </div>
+        </div>
+        <div class="container-fluid bottom-section section">
+            {% if owner %}
+                {% from '_formhelpers.html' import form_field %}
+                <div class="submission-form nbi-center">
+                    <form id="form-update" action="{{ url_for('update', id=object._id) }}"
+                          method="POST" enctype="multipart/form-data">
+                        {% for field in form %}
+                            {{ form_field(field) }}
+                        {% endfor %}
+                        <div class="form-group">
+                            <input id="btn-update" type="submit" class="btn btn-success btn-block btn-submit"
+                                   value="Update">
+                        </div>
+                    </form>
+                </div>
+            {% else %}
+                {% for key, value in object.__dict__.items() %}
+                    {% if key != '_id' %}
+                        <p>{{ key.upper() }}: {{ value }}</p>
+                    {% endif %}
+                {% endfor %}
+            {% endif %}
+        </div>
+    {% endif %}
+</div>
