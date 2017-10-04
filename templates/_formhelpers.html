@@ -1,5 +1,4 @@
 {% macro form_field(field) -%}
-    {% set required_ = False %}
     {% set with_label = kwargs.pop('with_label', False) %}
     {% set placeholder = '' %}
     {% if not with_label %}
@@ -8,19 +7,24 @@
     <div class="form-group {% if field.errors %}error{% endif %}">
         {% if with_label %}
             <label for="{{ field.id }}" class="control-label">
-                {{ field.label.text }}{% if field.flags.required %}{% endif %}:
+                *{{ field.label.text }}{% if field.flags.required %}{% endif %}:
             </label>
         {% endif %}
         <div class="controls">
             {% set class_ = kwargs.pop('class_', 'form-control') %}
             {% if field.flags.required %}
                 {% set required_ = True %}
+            {% else %}
+                {% set required_ = False %}
             {% endif %}
             {% if field.type == 'BooleanField' %}
                 <label class="checkbox">
                     {{ field(class_=class_, **kwargs) }}
                     {{ field.label.text|safe }}
                 </label>
+            {% elif field.type == 'MultiCheckboxField' %}
+                {% set class_ = 'list-inline' %}
+                {{ field(class_=class_, style=style_, **kwargs) }}
             {% else %}
                 {% if field.type in ('TextField', 'TextAreaField', 'PasswordField') %}
                     {% set class_ = class_ + ' input-xlarge' %}

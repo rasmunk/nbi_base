@@ -37,7 +37,7 @@ class ShelveObject():
             db.sync()
 
     @classmethod
-    def get_with(cls, key, value):
+    def get_with_search(cls, key, value):
         result = []
         search = "*" + value + "*"
         objects = cls.get_all()
@@ -46,3 +46,12 @@ class ShelveObject():
                 if len(fnmatch.filter([obj.__dict__[key].lower()], search.lower())) > 0:
                     result.append(obj)
         return result
+
+    @classmethod
+    def get_with_first(cls, key, value):
+        objects = cls.get_all()
+        for obj in objects:
+            if hasattr(obj, key):
+                if obj.__dict__[key] == value:
+                    return obj
+        return None

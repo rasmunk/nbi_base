@@ -3,6 +3,12 @@
  */
 
 
+function removeChildren(obj) {
+    while (obj.firstChild) {
+        obj.removeChild(obj.firstChild);
+    }
+}
+
 function isEmpty(obj) {
     return Object.keys(obj).length === 0;
 }
@@ -83,7 +89,6 @@ function setupTagSearch(createTileCallback) {
                 $('.loading-spinner').hide();
             },
             error: function (error) {
-                console.log(error);
                 $('.loading-spinner').hide();
             }
         });

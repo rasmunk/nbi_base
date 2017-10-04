@@ -30,7 +30,11 @@
             {% else %}
                 {% for key, value in object.__dict__.items() %}
                     {% if key not in ['_id', 'name', 'description', 'image'] %}
-                        <p>{{ key.capitalize() }}: {{ value }}</p>
+                        {% if key == 'area' %}
+                            <p>{{ key.capitalize() }}: {{ value[1] }}</p>
+                        {% else %}
+                            <p>{{ key.capitalize() }}: {{ value }}</p>
+                        {% endif %}
                     {% endif %}
                 {% endfor %}
             {% endif %}
