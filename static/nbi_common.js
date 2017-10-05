@@ -40,6 +40,21 @@ function setupOverview() {
     }
 }
 
+function errorRender(error) {
+    var flashes = document.getElementById('flashes');
+    removeChildren(flashes);
+    var json_response = error.responseJSON['data'];
+    for (var key in json_response) {
+        if (json_response.hasOwnProperty(key)) {
+            var messageContainer = document.createElement('div');
+            messageContainer.setAttribute('class', "alert alert-" + key);
+            messageContainer.setAttribute('role', 'alert');
+            messageContainer.innerText = json_response[key];
+            flashes.append(messageContainer);
+        }
+    }
+}
+
 
 function setupTagSearch(createTileCallback) {
     var typingTimer;                //timer identifier
@@ -48,7 +63,9 @@ function setupTagSearch(createTileCallback) {
     var form = $('#form-search');
 
     //disable enter submit
-    form.on('submit', function() { return false; });
+    form.on('submit', function () {
+        return false;
+    });
 
     //on keyup, start the countdown
     $input.on('keyup', function () {
@@ -90,6 +107,7 @@ function setupTagSearch(createTileCallback) {
             },
             error: function (error) {
                 $('.loading-spinner').hide();
+                errorRender(error);
             }
         });
     }
