@@ -29,7 +29,7 @@
                 </div>
             {% else %}
                 {% for key, value in object.__dict__.items() %}
-                    {% if key not in ['_id', 'name', 'description', 'image'] %}
+                    {% if key not in ['_id', '_type', 'name', 'description', 'image'] %}
                         {% if key == 'area' %}
                             <p>{{ key.capitalize() }}: {{ value[1] }}</p>
                         {% else %}

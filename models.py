@@ -3,10 +3,13 @@ import uuid
 import fnmatch
 from nbi_base import app
 
-class ShelveObject():
 
+class ShelveObject:
     def __init__(self):
+        # Key Identifier
         self._id = str(uuid.uuid4())
+        # Type identifier, used for retriving on the relvant instances
+        self._type = str(type(self))
 
     def save(self):
         with shelve.open(app.config['DB']) as db:
@@ -23,7 +26,7 @@ class ShelveObject():
     @classmethod
     def get_all(cls):
         with shelve.open(app.config['DB']) as db:
-            return [cls.get(key) for key in db.keys()]
+            return [cls.get(key) for key in db.keys() if db[key]['_type'] == str(cls)]
 
     @classmethod
     def remove(cls, shelve_id):
