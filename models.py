@@ -33,10 +33,10 @@ class ShelveObject:
         with shelve.open(app.config['DB']) as db:
             db.pop(shelve_id)
 
-    @staticmethod
-    def clear():
+    @classmethod
+    def clear(cls):
         with shelve.open(app.config['DB']) as db:
-            db.clear()
+            for instance in cls.get_all(): db.pop(instance._id)
             db.sync()
 
     @classmethod

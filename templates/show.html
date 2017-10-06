@@ -33,7 +33,7 @@
                 </div>
             {% else %}
                 {% for key, value in object.__dict__.items() %}
-                    {% if key not in ['_id', '_type', 'name', 'description', 'image'] %}
+                    {% if key not in ['_id', '_type', 'name', 'description', 'image', 'csrf_token'] %}
                         <p> {{ key.capitalize() }}:
                             {% if value is string %}
                                 {{ value }}
