@@ -19,8 +19,13 @@ class ShelveObject:
     # Returns a new instance of the calling class with the same _shelve id.
     @classmethod
     def get(cls, id):
-        with shelve.open(app.config['DB']) as db:
-            return cls(**db[id])
+        _object = None
+        try:
+            with shelve.open(app.config['DB']) as db:
+                _object = cls(**db[id])
+        except KeyError:
+            pass
+        return _object
 
     # Returns a list of instances of the calling class
     @classmethod
