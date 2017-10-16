@@ -144,6 +144,9 @@ a, a:hover {
     text-align: left;
 }
 
+.text-block {
+    white-space: pre-line;
+}
 
 /* Datasets Overview */
 /* Desktop */
