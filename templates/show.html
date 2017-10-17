@@ -26,9 +26,14 @@
                             {% endif %}
                         {% endfor %}
                         <div class="form-group">
-                            <input id="btn-update" type="submit" class="btn btn-success btn-block btn-submit"
+                            <input id="btn-update" type="submit" class="btn btn-warning btn-block"
                                    value="Update">
                         </div>
+                    </form>
+                    <form id="form-delete" action="{{ url_for('delete', id=object._id) }}" method="POST">
+                        {{ form_field(form.csrf_token) }}
+                        <input id="btn-delete" type="submit" class="btn btn-danger btn-block"
+                               value="Delete">
                     </form>
                 </div>
             {% else %}

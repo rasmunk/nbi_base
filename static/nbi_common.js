@@ -13,12 +13,6 @@ function isEmpty(obj) {
     return Object.keys(obj).length === 0;
 }
 
-function removeChildren(obj) {
-    while (obj.firstChild) {
-        obj.removeChild(obj.firstChild);
-    }
-}
-
 function setupThumbnailHoverEffect(thumbnail) {
     thumbnail.onmouseover = function () {
         this.style.borderColor = "#46743c";
