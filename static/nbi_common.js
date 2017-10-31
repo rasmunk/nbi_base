@@ -22,6 +22,11 @@ function setupThumbnailHoverEffect(thumbnail) {
         this.style.borderColor = "#8fd182";
         this.style.borderWidth = "2px";
     };
+
+    thumbnail.onclick = function () {
+        this.style.borderColor = "#8fd182";
+        this.style.borderWidth = "2px";
+    }
 }
 
 

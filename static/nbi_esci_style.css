@@ -45,7 +45,6 @@
     margin: auto;
 }
 
-
 .section {
     padding-top: 5rem;
     padding-bottom: 5rem;
@@ -152,6 +151,10 @@ a, a:hover {
 /* Desktop */
 
 @media (min-width: 768px) {
+    .d-block {
+        width: 280px;
+    }
+
     .thumbnail {
         width: 280px;
         height: 500px;
