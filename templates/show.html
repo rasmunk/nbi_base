@@ -38,7 +38,7 @@
                 </div>
             {% else %}
                 {% for key, value in object.__dict__.items() %}
-                    {% if key not in ['_id', '_type', 'name', 'description', 'image', 'csrf_token'] %}
+                    {% if key not in hidden_properties_list %}
                         <p> {{ key.capitalize() }}:
                             {% if value is string %}
                                 {{ value }}
@@ -46,6 +46,8 @@
                                 {% for item in value %}
                                     {{ item }}
                                 {% endfor %}
+                            {% else %}
+                                {{ value }}
                             {% endif %}
                         </p>
                     {% endif %}

@@ -30,8 +30,10 @@ class ShelveObject:
     # Returns a list of instances of the calling class
     @classmethod
     def get_all(cls):
+        ids = []
         with shelve.open(app.config['DB']) as db:
-            return [cls.get(key) for key in db.keys() if db[key]['_type'] == str(cls)]
+            ids = [key for key in db.keys() if db[key]['_type'] == str(cls)]
+        return [cls.get(id) for id in ids]
 
     @classmethod
     def remove(cls, shelve_id):
@@ -40,9 +42,8 @@ class ShelveObject:
 
     @classmethod
     def clear(cls):
-        with shelve.open(app.config['DB']) as db:
-            for instance in cls.get_all(): db.pop(instance._id)
-            db.sync()
+        for instance in cls.get_all():
+            cls.remove(instance._id)
 
     @classmethod
     def get_with_search(cls, key, value):
