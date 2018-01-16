@@ -13,16 +13,17 @@ class ShelveObject:
 
     def save(self):
         with shelve.open(app.config['DB']) as db:
-            db[self._id] = {key: self.__dict__[key] for key in self.__dict__.keys()}
+            db[self._id] = {key: self.__dict__[key] for key in
+                            self.__dict__.keys()}
         return self._id
 
     # Returns a new instance of the calling class with the same _shelve id.
     @classmethod
-    def get(cls, id):
+    def get(cls, instance_id):
         _object = None
         try:
             with shelve.open(app.config['DB']) as db:
-                _object = cls(**db[id])
+                _object = cls(**db[instance_id])
         except KeyError:
             pass
         return _object
@@ -33,7 +34,7 @@ class ShelveObject:
         ids = []
         with shelve.open(app.config['DB']) as db:
             ids = [key for key in db.keys() if db[key]['_type'] == str(cls)]
-        return [cls.get(id) for id in ids]
+        return [cls.get(instance_id) for instance_id in ids]
 
     @classmethod
     def remove(cls, shelve_id):
@@ -52,7 +53,8 @@ class ShelveObject:
         objects = cls.get_all()
         for obj in objects:
             if hasattr(obj, key):
-                if len(fnmatch.filter([obj.__dict__[key].lower()], search.lower())) > 0:
+                if len(fnmatch.filter([obj.__dict__[key].lower()],
+                                      search.lower())) > 0:
                     result.append(obj)
         return result
 

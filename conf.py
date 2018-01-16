@@ -1,4 +1,4 @@
-## Common configuration
+# Common configuration
 import os
 from nbi_base import app
 
