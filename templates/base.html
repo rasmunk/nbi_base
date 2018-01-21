@@ -13,10 +13,13 @@
 {% block styles -%}
     {{ super() }}  {# load boostrap css #}
     <script src="https://code.jquery.com/jquery-3.2.1.min.js"
-            integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+            integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+            crossorigin="anonymous"></script>
     <link rel="stylesheet" type="text/css"
           href="{{ url_for('common_static', filename='nbi_esci_style.css') }}">
-    <script type="text/javascript" src="{{ url_for('common_static', filename='nbi_common.js') }}"></script>
+    <script type="text/javascript"
+            src="{{ url_for('common_static', filename='nbi_common.js') }}">
+    </script>
 {% endblock %}
 
 {# navigation & flashes #}
@@ -29,17 +32,17 @@
 
     {{ nav.nav_bar.render() }}
     {# flashes #}
-    <div class="container messages">
-        {% with messages = get_flashed_messages(with_categories=true) %}
-            {% if messages %}
-                <ul class=flashes>
+    <div class="container">
+        <ul class="flashes" id="flashes">
+            {% with messages = get_flashed_messages(with_categories=true) %}
+                {% if messages %}
                     {% for category, message in messages %}
                         <div class="alert alert-{{ category }}" role="alert">
                             {{ message }}
                         </div>
                     {% endfor %}
-                </ul>
-            {% endif %}
-        {% endwith %}
+                {% endif %}
+            {% endwith %}
+        </ul>
     </div>
 {% endblock %}

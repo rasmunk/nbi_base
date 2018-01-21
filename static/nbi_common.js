@@ -2,7 +2,6 @@
  * Created by rasmusmunk on 27/09/2017.
  */
 
-
 function removeChildren(obj) {
     while (obj.firstChild) {
         obj.removeChild(obj.firstChild);
@@ -28,7 +27,6 @@ function setupThumbnailHoverEffect(thumbnail) {
         this.style.borderWidth = "2px";
     }
 }
-
 
 function setupOverview() {
     var thumbnails = document.getElementsByClassName('thumbnail');

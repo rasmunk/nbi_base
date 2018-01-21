@@ -9,14 +9,16 @@
         </div>
         <div class="container-fluid mid-section section">
             <div class="nbi-left">
-                <img src="{{ url_for('img_render', filename=object.image) }}" class="img-fluid">
+                <img src="{{ url_for('img_render', filename=object.image) }}"
+                     class="img-fluid">
             </div>
         </div>
         <div class="container-fluid bottom-section section">
             {% if owner %}
                 {% from '_formhelpers.html' import form_field %}
                 <div class="submission-form nbi-center">
-                    <form id="form-update" action="{{ url_for('update', id=object._id) }}"
+                    <form id="form-update"
+                          action="{{ url_for('update', id=object._id) }}"
                           method="POST" enctype="multipart/form-data">
                         {% for field in form %}
                             {% if field.id in ['image'] %}
@@ -26,14 +28,17 @@
                             {% endif %}
                         {% endfor %}
                         <div class="form-group">
-                            <input id="btn-update" type="submit" class="btn btn-warning btn-block"
+                            <input id="btn-update" type="submit"
+                                   class="btn btn-warning btn-block"
                                    value="Update">
                         </div>
                     </form>
-                    <form id="form-delete" action="{{ url_for('delete', id=object._id) }}" method="POST">
+                    <form id="form-delete"
+                          action="{{ url_for('delete', id=object._id) }}"
+                          method="POST">
                         {{ form_field(form.csrf_token) }}
-                        <input id="btn-delete" type="submit" class="btn btn-danger btn-block"
-                               value="Delete">
+                        <input id="btn-delete" type="submit"
+                               class="btn btn-danger btn-block" value="Delete">
                     </form>
                 </div>
             {% else %}

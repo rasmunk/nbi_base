@@ -34,7 +34,9 @@
                 {{ field(class_=class_, placeholder=placeholder, required=required_, **kwargs) }}
             {% endif %}
             {% if field.errors %}
-                <span class="error help-inline">{{ field.errors|join(', ') }}</span>
+                <span class="error help-inline">
+                    {{ field.errors|join(', ') }}
+                </span>
             {% endif %}
             {% if field.description %}
                 <p class="help-block">{{ field.description|safe }}</p>
