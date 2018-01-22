@@ -1,7 +1,7 @@
 <div class="container-full">
     {% if object %}
         <div class="container-fluid top-section section">
-            <h1><a href="{{ url_for('show', id=object._id) }}"
+            <h1><a href="{{ url_for('show', object_id=object._id) }}"
                    class="d-block mb-4" style="color: black;">{{ object.name }}</a></h1>
             <div class="nbi-left text-block">
                 <p>{{ object.description }}</p>
@@ -18,7 +18,7 @@
                 {% from '_formhelpers.html' import form_field %}
                 <div class="submission-form nbi-center">
                     <form id="form-update"
-                          action="{{ url_for('update', id=object._id) }}"
+                          action="{{ url_for('update', object_id=object._id) }}"
                           method="POST" enctype="multipart/form-data">
                         {% for field in form %}
                             {% if field.id in ['image'] %}
@@ -34,7 +34,7 @@
                         </div>
                     </form>
                     <form id="form-delete"
-                          action="{{ url_for('delete', id=object._id) }}"
+                          action="{{ url_for('delete', object_id=object._id) }}"
                           method="POST">
                         {{ form_field(form.csrf_token) }}
                         <input id="btn-delete" type="submit"

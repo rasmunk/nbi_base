@@ -26,12 +26,14 @@
                 {% set class_ = 'list-inline' %}
                 {{ field(class_=class_, style=style_, **kwargs) }}
             {% else %}
-                {% if field.type in ('TextField', 'TextAreaField', 'PasswordField') %}
+                {% if field.type in ('TextField', 'TextAreaField',
+                                     'PasswordField') %}
                     {% set class_ = class_ + ' input-xlarge' %}
                 {% elif field.type == 'FileField' %}
                     {% set class_ = class_ + ' input-file' %}
                 {% endif %}
-                {{ field(class_=class_, placeholder=placeholder, required=required_, **kwargs) }}
+                {{ field(class_=class_, placeholder=placeholder,
+                         required=required_, **kwargs) }}
             {% endif %}
             {% if field.errors %}
                 <span class="error help-inline">

@@ -1,6 +1,7 @@
 import shelve
 import uuid
 import fnmatch
+import fcntl
 from nbi_base import app
 
 
@@ -12,9 +13,15 @@ class ShelveObject:
         self._type = str(type(self))
 
     def save(self):
-        with shelve.open(app.config['DB']) as db:
-            db[self._id] = {key: self.__dict__[key] for key in
-                            self.__dict__.keys()}
+        with open(app.config['DB_LOCK'], 'wb') as lckfile:
+            # Lock before db write operation, blocking for now
+            fcntl.flock(lckfile.fileno(), fcntl.LOCK_EX)
+            with shelve.open(app.config['DB']) as db:
+                db[self._id] = {key: self.__dict__[key] for key in
+                                self.__dict__.keys()}
+            # Unlock after operation
+            fcntl.flock(lckfile.fileno(), fcntl.LOCK_UN)
+
         return self._id
 
     # Returns a new instance of the calling class with the same _shelve id.
@@ -38,8 +45,13 @@ class ShelveObject:
 
     @classmethod
     def remove(cls, shelve_id):
-        with shelve.open(app.config['DB']) as db:
-            db.pop(shelve_id)
+        with open(app.config['DB_LOCK'], 'wb') as lckfile:
+            # Lock before db write operation, blocking for now
+            fcntl.flock(lckfile.fileno(), fcntl.LOCK_EX)
+            with shelve.open(app.config['DB']) as db:
+                db.pop(shelve_id)
+            # Unlock after operation
+            fcntl.flock(lckfile.fileno(), fcntl.LOCK_UN)
 
     @classmethod
     def clear(cls):
