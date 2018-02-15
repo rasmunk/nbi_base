@@ -1,8 +1,12 @@
 <div class="container-full">
     {% if object %}
         <div class="container-fluid top-section section">
-            <h1><a href="{{ url_for('show', object_id=object._id) }}"
-                   class="d-block mb-4" style="color: black;">{{ object.name }}</a></h1>
+            <h1 class="nbi-left">
+                <a href="{{ url_for('show', object_id=object._id)}}"
+                   style="word-wrap: break-word; color: black;">
+                    {{ object.name }}
+                </a>
+            </h1>
             <div class="nbi-left text-block">
                 <p>{{ object.description }}</p>
             </div>
