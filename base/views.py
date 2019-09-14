@@ -1,4 +1,4 @@
-from nbi_base import app
+from base import app
 from flask import send_from_directory
 
 

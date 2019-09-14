@@ -2,7 +2,7 @@ import shelve
 import uuid
 import fnmatch
 import fcntl
-from nbi_base import app
+from base import app
 
 
 class ShelveObject:

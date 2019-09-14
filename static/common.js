@@ -1,6 +1,8 @@
 /**
  * Created by rasmusmunk on 27/09/2017.
  */
+/*jshint esversion: 6 */
+"use strict";
 
 function removeChildren(obj) {
     while (obj.firstChild) {
@@ -25,12 +27,12 @@ function setupThumbnailHoverEffect(thumbnail) {
     thumbnail.onclick = function () {
         this.style.borderColor = "#8fd182";
         this.style.borderWidth = "2px";
-    }
+    };
 }
 
 function setupOverview() {
-    var thumbnails = document.getElementsByClassName('thumbnail');
-    for (var thumbnail in thumbnails) {
+    let thumbnails = document.getElementsByClassName('thumbnail');
+    for (let thumbnail in thumbnails) {
         if (thumbnails.hasOwnProperty(thumbnail)) {
             setupThumbnailHoverEffect(thumbnails[thumbnail]);
         }
@@ -38,12 +40,12 @@ function setupOverview() {
 }
 
 function errorRender(error) {
-    var flashes = document.getElementById('flashes');
+    let flashes = document.getElementById('flashes');
     removeChildren(flashes);
-    var json_response = error.responseJSON['data'];
-    for (var key in json_response) {
+    let json_response = error.responseJSON.data;
+    for (let key in json_response) {
         if (json_response.hasOwnProperty(key)) {
-            var messageContainer = document.createElement('div');
+            let messageContainer = document.createElement('div');
             messageContainer.setAttribute('class', "alert alert-" + key);
             messageContainer.setAttribute('role', 'alert');
             messageContainer.innerText = json_response[key];
@@ -54,10 +56,10 @@ function errorRender(error) {
 
 
 function setupTagSearch(createTileCallback) {
-    var typingTimer;                //timer identifier
-    var doneTypingInterval = 500;  //time in ms, 2 seconds
-    var $input = $('#tag');
-    var form = $('#form-search');
+    let typingTimer;                //timer identifier
+    let doneTypingInterval = 500;  //time in ms, 2 seconds
+    let $input = $('#tag');
+    let form = $('#form-search');
 
     //disable enter submit
     form.on('submit', function () {
@@ -77,7 +79,7 @@ function setupTagSearch(createTileCallback) {
 
     function tagReady() {
         $('.loading-spinner').show();
-        var _data = {
+        let _data = {
             'tag': $input.val(),
             'csrf_token': $('#csrf_token').val()
         };
@@ -86,13 +88,13 @@ function setupTagSearch(createTileCallback) {
             data: _data,
             type: 'POST',
             success: function (response) {
-                var gridItems = document.getElementById('grid-items');
+                let gridItems = document.getElementById('grid-items');
                 removeChildren(gridItems);
-                for (var results in response) {
+                for (let results in response) {
                     if (response.hasOwnProperty(results)) {
-                        for (var result in response[results]) {
+                        for (let result in response[results]) {
                             if (response[results].hasOwnProperty(result)) {
-                                var tile = createTileCallback(response[results][result]);
+                                let tile = createTileCallback(response[results][result]);
                                 // Access thumbnail child element -> attach hover effect
                                 setupThumbnailHoverEffect(tile.getElementsByClassName('thumbnail')[0]);
                                 gridItems.appendChild(tile);

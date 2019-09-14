@@ -1,18 +1,18 @@
 <div class="container-full">
     {% if object %}
         <div class="container-fluid top-section section">
-            <h1 class="nbi-left">
+            <h1 class="left">
                 <a href="{{ url_for('show', object_id=object._id)}}"
                    style="word-wrap: break-word; color: black;">
                     {{ object.name }}
                 </a>
             </h1>
-            <div class="nbi-left text-block">
+            <div class="left text-block">
                 <p>{{ object.description }}</p>
             </div>
         </div>
         <div class="container-fluid mid-section section">
-            <div class="nbi-left">
+            <div class="left">
                 <img src="{{ url_for('img_render', filename=object.image) }}"
                      class="img-fluid">
             </div>
@@ -20,7 +20,7 @@
         <div class="container-fluid bottom-section section">
             {% if owner %}
                 {% from '_formhelpers.html' import form_field %}
-                <div class="submission-form nbi-center">
+                <div class="submission-form center">
                     <form id="form-update"
                           action="{{ url_for('update', object_id=object._id) }}"
                           method="POST" enctype="multipart/form-data">

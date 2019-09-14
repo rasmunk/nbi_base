@@ -36,11 +36,11 @@
     background-color: darkgrey;
 }
 
-.nbi-left {
+.left {
     max-width: 50rem;
 }
 
-.nbi-center {
+.center {
     max-width: 50rem;
     margin: auto;
 }
