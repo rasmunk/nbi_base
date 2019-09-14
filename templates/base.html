@@ -24,12 +24,6 @@
 
 {# navigation & flashes #}
 {% block navbar %}
-    <div class="container-full">
-        <div class="banner">
-            <img src="{{ url_for('common_static', filename='images/banner-logo.jpg') }}">
-        </div>
-    </div>
-
     {{ nav.nav_bar.render() }}
     {# flashes #}
     <div class="container">
